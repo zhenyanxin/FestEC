@@ -26,6 +26,9 @@ public class RestClientBuilder {
     private static final Map<String, Object> PARAMS = RestCreator.getParams();
     private IRequest mIRequest = null;
     private ISuccess mISuccess = null;
+    private String mDownloadDir = null;
+    private String mExtension =null;
+    private String mName = null;
     private IFailure mIFailure = null;
     private IError mIError = null;
     private RequestBody mBody = null;
@@ -99,6 +102,36 @@ public class RestClientBuilder {
     }
 
     /**
+     * 下载后文件存放的目录
+     * @param dir
+     * @return
+     */
+    public final RestClientBuilder dir(String dir){
+        this.mDownloadDir = dir;
+        return this;
+    }
+
+    /**
+     * 下载后的后缀名
+     * @param extension
+     * @return
+     */
+    public final RestClientBuilder extension(String extension){
+        this.mExtension=extension;
+        return this;
+    }
+
+    /**
+     * 下载的文件名
+     * @param name
+     * @return
+     */
+    public final RestClientBuilder name(String name){
+        this.mName=name;
+        return this;
+    }
+
+    /**
      * 请求信息
      * @param iRequest
      * @return
@@ -166,6 +199,6 @@ public class RestClientBuilder {
      * @return
      */
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody,mFile, mContext, mLoaderStyle);
+        return new RestClient(mUrl, PARAMS, mDownloadDir,mExtension,mName,mIRequest, mISuccess, mIFailure, mIError, mBody,mFile, mContext, mLoaderStyle);
     }
 }
